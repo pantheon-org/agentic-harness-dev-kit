@@ -1,5 +1,5 @@
-//! `skill-install`: agent-directory detection and bundled-skill installation
-//! for the tekhne tool CLIs.
+//! `ahdk-install`: agent-directory detection and bundled-skill installation
+//! for the Agentic Harness Dev Kit tool CLIs.
 //!
 //! Ported from `cli/lib/types/agents.ts` and `cli/lib/install`. The crate
 //! exposes three concerns, one per module:
