@@ -7,7 +7,7 @@ members = [
 
 [workspace.package]
 edition = "2021"
-license = "ISC"
+license = "MIT"
 repository = "https://github.com/pantheon-org/agentic-harness-dev-kit"
 rust-version = "1.96"
 
