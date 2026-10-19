@@ -1,8 +1,8 @@
-//! Shared error type for the tekhne tool crates.
+//! Shared error type for the Agentic Harness Dev Kit tool crates.
 
 use std::path::{Path, PathBuf};
 
-/// Errors shared across the tekhne tool crates.
+/// Errors shared across the Agentic Harness Dev Kit tool crates.
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
     /// An i/o operation failed; carries the path for context.

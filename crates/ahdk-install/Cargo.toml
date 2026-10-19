@@ -1,15 +1,15 @@
 [package]
-name = "skill-install"
+name = "ahdk-install"
 version = "0.0.0"
 edition.workspace = true
 license.workspace = true
 repository.workspace = true
 rust-version.workspace = true
 publish = false
-description = "Agent-directory detection and bundled-skill installation for tekhne tool CLIs."
+description = "Agentic Harness Dev Kit (AHDK) installer: agent-directory detection and bundled-skill installation for agent-harness tools."
 
 [dependencies]
-common = { path = "../common" }
+ahdk-core = { workspace = true }
 
 [dev-dependencies]
 tempfile = { workspace = true }

@@ -8,7 +8,7 @@
 
 use std::path::{Path, PathBuf};
 
-use common::{Error, Result};
+use ahdk_core::{Error, Result};
 
 /// The resolved base directories an agent's install paths are computed from.
 ///
