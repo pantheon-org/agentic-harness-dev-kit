@@ -8,7 +8,10 @@
 
 pub mod config;
 pub mod error;
+pub mod frontmatter;
 pub mod fs;
 pub mod output;
+#[cfg(feature = "validate")]
+pub mod validate;
 
 pub use error::{Error, Result};
