@@ -33,11 +33,11 @@ local preCommit = new Mapping<String, Step> {
 local prePush = new Mapping<String, Step> {
     ["clippy"] {
         glob = List("*.rs", "Cargo.toml", "Cargo.lock")
-        check = "cargo clippy --workspace --all-targets --locked -- -D warnings"
+        check = "cargo clippy --workspace --all-targets --all-features --locked -- -D warnings"
     }
     ["test"] {
         glob = List("*.rs", "Cargo.toml", "Cargo.lock")
-        check = "cargo test --workspace --locked"
+        check = "cargo test --workspace --all-features --locked"
     }
 }
 

@@ -10,18 +10,35 @@ related to Harness.io or to the Holochain `hdk` crate.
 
 | Crate | Purpose |
 |---|---|
-| `pahdk-core` | Shared configuration, error types, structured output and filesystem helpers |
+| `pahdk-core` | Shared configuration, error types, structured output and filesystem helpers; frontmatter splitting; and, behind the `validate` feature, validating a document against a JSON Schema and a heading list |
 | `pahdk-install` | Agent-directory detection (42 agents) and bundled-skill installation |
 
 The crates are at `0.0.0` and are not published yet. The API is internal to the tools above and may change
 without notice until a `0.1.0` release.
 
+## Validating documents
+
+A tool that writes markdown with YAML frontmatter ships its shape as data: a `*.schema.json` for the
+frontmatter and a list of required headings. With the `validate` feature, `pahdk-core` checks a document
+against both and reports every problem with its location:
+
+```toml
+pahdk-core = { git = "https://github.com/pantheon-org/pantheon-agentic-harness-dev-kit.git", tag = "...", features = ["validate"] }
+```
+
+```rust
+let issues = pahdk_core::validate::document_issues(&content, &schema, &required_headings)?;
+```
+
+`frontmatter::split` is available without the feature. Structure only: prose quality and whether a link
+resolves stay with the calling tool.
+
 ## Development
 
 ```bash
 cargo fmt --all --check
-cargo clippy --workspace --all-targets --locked -- -D warnings
-cargo test --workspace --locked
+cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
+cargo test --workspace --all-features --locked
 ```
 
 ## History

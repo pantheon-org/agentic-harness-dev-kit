@@ -12,6 +12,13 @@ description = "Pantheon Agentic Harness Dev Kit (PAHDK) core: shared configurati
 serde = { workspace = true }
 serde_json = { workspace = true }
 thiserror = { workspace = true }
+serde_yaml_ng = { workspace = true, optional = true }
+jsonschema = { workspace = true, optional = true }
+
+[features]
+# Document validation against a JSON Schema and a heading list. Off by default
+# so tools that do not validate do not build the JSON Schema crate.
+validate = ["dep:jsonschema", "dep:serde_yaml_ng"]
 
 [dev-dependencies]
 tempfile = { workspace = true }
