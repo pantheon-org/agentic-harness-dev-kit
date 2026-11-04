@@ -3,24 +3,6 @@
 version = 4
 
 [[package]]
-name = "ahdk-core"
-version = "0.0.0"
-dependencies = [
- "serde",
- "serde_json",
- "tempfile",
- "thiserror",
-]
-
-[[package]]
-name = "ahdk-install"
-version = "0.0.0"
-dependencies = [
- "ahdk-core",
- "tempfile",
-]
-
-[[package]]
 name = "bitflags"
 version = "2.13.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -88,6 +70,24 @@ name = "once_cell"
 version = "1.21.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9f7c3e4beb33f85d45ae3e3a1792185706c8e16d043238c593331cc7cd313b50"
+
+[[package]]
+name = "pahdk-core"
+version = "0.0.0"
+dependencies = [
+ "serde",
+ "serde_json",
+ "tempfile",
+ "thiserror",
+]
+
+[[package]]
+name = "pahdk-install"
+version = "0.0.0"
+dependencies = [
+ "pahdk-core",
+ "tempfile",
+]
 
 [[package]]
 name = "proc-macro2"

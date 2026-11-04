@@ -1,15 +1,15 @@
 [package]
-name = "ahdk-install"
+name = "pahdk-install"
 version = "0.0.0"
 edition.workspace = true
 license.workspace = true
 repository.workspace = true
 rust-version.workspace = true
 publish = false
-description = "Agentic Harness Dev Kit (AHDK) installer: agent-directory detection and bundled-skill installation for agent-harness tools."
+description = "Pantheon Agentic Harness Dev Kit (PAHDK) installer: agent-directory detection and bundled-skill installation for agent-harness tools."
 
 [dependencies]
-ahdk-core = { workspace = true }
+pahdk-core = { workspace = true }
 
 [dev-dependencies]
 tempfile = { workspace = true }

@@ -1,12 +1,12 @@
 [package]
-name = "ahdk-core"
+name = "pahdk-core"
 version = "0.0.0"
 edition.workspace = true
 license.workspace = true
 repository.workspace = true
 rust-version.workspace = true
 publish = false
-description = "Agentic Harness Dev Kit (AHDK) core: shared configuration, error types, structured output and filesystem helpers for agent-harness tools."
+description = "Pantheon Agentic Harness Dev Kit (PAHDK) core: shared configuration, error types, structured output and filesystem helpers for agent-harness tools."
 
 [dependencies]
 serde = { workspace = true }
