@@ -1,14 +1,14 @@
 [workspace]
 resolver = "2"
 members = [
-    "crates/ahdk-core",
-    "crates/ahdk-install",
+    "crates/pahdk-core",
+    "crates/pahdk-install",
 ]
 
 [workspace.package]
 edition = "2021"
 license = "MIT"
-repository = "https://github.com/pantheon-org/agentic-harness-dev-kit"
+repository = "https://github.com/pantheon-org/pantheon-agentic-harness-dev-kit"
 rust-version = "1.96"
 
 [workspace.dependencies]
@@ -16,4 +16,4 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 thiserror = "2"
 tempfile = "3"
-ahdk-core = { path = "crates/ahdk-core" }
+pahdk-core = { path = "crates/pahdk-core" }
