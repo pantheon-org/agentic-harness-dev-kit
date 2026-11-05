@@ -1,0 +1,20 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "bootstrap-sha": "6d2e26052cdda1801332fab69730233a2df39e2e",
+  "include-component-in-tag": false,
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": false,
+  "packages": {
+    ".": {
+      "release-type": "simple",
+      "package-name": "pantheon-agentic-harness-dev-kit",
+      "changelog-path": "CHANGELOG.md",
+      "extra-files": [
+        { "type": "toml", "path": "crates/pahdk-core/Cargo.toml", "jsonpath": "$.package.version" },
+        { "type": "toml", "path": "crates/pahdk-install/Cargo.toml", "jsonpath": "$.package.version" },
+        { "type": "toml", "path": "/Cargo.lock", "jsonpath": "$.package[?(@.name=='pahdk-core')].version" },
+        { "type": "toml", "path": "/Cargo.lock", "jsonpath": "$.package[?(@.name=='pahdk-install')].version" }
+      ]
+    }
+  }
+}
