@@ -4,6 +4,9 @@
   "include-component-in-tag": false,
   "bump-minor-pre-major": true,
   "bump-patch-for-minor-pre-major": false,
+  "versioning": "prerelease",
+  "prerelease": true,
+  "prerelease-type": "rc",
   "packages": {
     ".": {
       "release-type": "simple",
