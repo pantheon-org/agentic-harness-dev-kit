@@ -1,0 +1,44 @@
+name: Release Please
+
+# Keeps one rolling release PR up to date on every push to main (version bump in
+# both crates and Cargo.lock, plus CHANGELOG.md, from conventional commits). When
+# that PR is merged the same run creates the vX.Y.Z tag and the GitHub Release.
+# Consumers pin pahdk-core and pahdk-install by that tag, so the tag is the release.
+# There is no cargo-dist here, so release-please may create the GitHub Release.
+# Ported from pantheon-org/tekhne.
+#
+# Uses the pantheon-ai-bot App token because a tag created with GITHUB_TOKEN does not
+# trigger other workflows. Needs the org secret GH_APP_PRIVATE_KEY.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+# Never cancel a run mid-way: it could leave a version bumped but untagged.
+concurrency:
+  group: release-please
+  cancel-in-progress: false
+
+jobs:
+  release-please:
+    name: Update release PR and tag releases
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mint pantheon-ai-bot token
+        id: app-token
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        with:
+          client-id: "Iv23ligzn16vkDCWfHgc"
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+
+      - uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
