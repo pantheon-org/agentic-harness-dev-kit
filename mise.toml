@@ -9,6 +9,9 @@ shellcheck = "latest"
 # rumdl is pre-1.0, so a minor bump can add rules and change what the lint gate
 # reports. Pinned exactly (unlike the other linters), bumped on purpose.
 rumdl = "0.2.77"
+# Lints skill frontmatter and agent files. Keep in sync with AGNIX_VERSION in
+# .github/workflows/agnix.yml.
+"github:agent-sh/agnix" = "0.56.6"
 
 [settings]
 # Refuse tool releases younger than a week when resolving versions.
