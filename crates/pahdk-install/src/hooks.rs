@@ -634,9 +634,13 @@ fn add_hk(text: &str, spec: &HookSpec) -> Result<String> {
     let mut lines = to_lines(text);
     let snippet = hk_snippet(spec);
     let Some(hooks) = lines.iter().position(|l| l.trim_end() == "hooks {") else {
-        let mut block = vec!["hooks {".to_string()];
-        block.extend(hk_hooks_block(spec, 4));
+        // The whole `hooks { }` block is ours, so the markers wrap it and
+        // uninstall removes the wrapper too.
+        let inner = hk_hooks_block(spec, 4);
+        let mut block = vec![begin_marker("//", &spec.id), "hooks {".to_string()];
+        block.extend_from_slice(&inner[1..inner.len() - 1]);
         block.push("}".to_string());
+        block.push(end_marker("//", &spec.id));
         let at = lines.len();
         splice(&mut lines, at, block);
         return Ok(from_lines(&lines));
@@ -941,6 +945,16 @@ mod tests {
         let repo = repo_with(&[("hk.pkl", hk)]);
         install_hook(repo.path(), &spec(), &HookOptions::default()).unwrap();
         assert!(read(&repo, "hk.pkl").contains("[\"pre-commit\"] {"));
+        uninstall_hook(repo.path(), "adr-index").unwrap();
+        assert_eq!(read(&repo, "hk.pkl"), hk);
+    }
+
+    #[test]
+    fn hk_without_a_hooks_block_gets_one_and_loses_it_on_uninstall() {
+        let hk = "amends \"x\"\n";
+        let repo = repo_with(&[("hk.pkl", hk)]);
+        install_hook(repo.path(), &spec(), &HookOptions::default()).unwrap();
+        assert!(read(&repo, "hk.pkl").contains("hooks {"));
         uninstall_hook(repo.path(), "adr-index").unwrap();
         assert_eq!(read(&repo, "hk.pkl"), hk);
     }
