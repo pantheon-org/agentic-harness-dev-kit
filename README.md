@@ -33,6 +33,28 @@ let issues = pahdk_core::validate::document_issues(&content, &schema, &required_
 `frontmatter::split` is available without the feature. Structure only: prose quality and whether a link
 resolves stay with the calling tool.
 
+## Installing a skill's git hook
+
+A skill that needs a git hook ships a `hook.json` (`id`, `command`, optional `description`) next to its `SKILL.md`.
+`pahdk_install::hooks` adds that hook to the configuration of the hook manager the repository already uses:
+
+| Manager | File written | Notes |
+|---|---|---|
+| hk | `hk.pkl` | A `steps = name` line becomes `steps = (name) { ... }`; uninstall restores it |
+| pre-commit | `.pre-commit-config.yaml` | A `repo: local` entry |
+| lefthook | `lefthook.yml` (or `.yaml`, dotted) | A command under `pre-commit` |
+| husky | `.husky/pre-commit` | A marked block of shell |
+
+- `detect_manager` finds the manager. With none, or several, `install_hook` returns `NoManager` or `Ambiguous` and
+  writes nothing; the calling CLI asks, then retries with `HookOptions::manager`.
+- Everything the dev kit adds sits between `pahdk:begin <id>` and `pahdk:end <id>` comments. A second install finds
+  the marker and changes nothing; `uninstall_hook` removes only the marked lines.
+- `HookOptions::opt_out` writes nothing. `remember_opt_out` records the choice in `.git/pahdk-hooks.json` so an update
+  does not ask again.
+- The hook prints `[pahdk] <id>: running` to stderr, so the first commit shows it ran.
+- A shape the dev kit cannot edit safely (for example `steps = makeSteps(1)` in `hk.pkl`) is an error that prints
+  the snippet to add by hand.
+
 ## Development
 
 ```bash
