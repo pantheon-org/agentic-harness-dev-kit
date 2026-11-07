@@ -63,6 +63,11 @@ cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
 cargo test --workspace --all-features --locked
 ```
 
+A pull request title is `type(scope): lowercase summary`, checked by the Conventional Commit Title workflow. Pull
+requests are squash-merged, so the title is the commit message release-please reads. The allowed types are
+release-please's defaults, listed in `.github/commit-types.txt`. The title workflow holds a copy of the list in its
+regex, and `.github/scripts/check-commit-types.sh` fails if the two drift apart.
+
 ## History
 
 Extracted from [pantheon-org/tekhne](https://github.com/pantheon-org/tekhne) with `git filter-repo`
